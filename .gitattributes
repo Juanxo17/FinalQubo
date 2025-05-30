@@ -1,0 +1,35 @@
+# Configuración de fin de línea automática para archivos de texto
+* text=auto
+
+# Archivos de texto explícitos
+*.js text
+*.jsx text
+*.json text
+*.css text
+*.md text
+*.html text
+*.svg text
+*.txt text
+*.yml text
+*.yaml text
+
+# Declarar archivos binarios para que no se modifiquen
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.ttf binary
+*.otf binary
+*.mp4 binary
+*.webm binary
+*.mp3 binary
+*.wav binary
+
+# Configuración específica para archivos de proyecto
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.sh text eol=lf

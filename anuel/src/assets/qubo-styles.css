@@ -1,0 +1,375 @@
+/* Variables de colores personalizadas para Qubo */
+:root {
+  /* Paleta principal basada en colores de Twitter pero con matices propios */
+  --qubo-primary: #1a8cd8;     /* Azul principal similar al de Twitter pero más oscuro */
+  --qubo-secondary: #4ea0f0;   /* Azul secundario más claro */
+  --qubo-accent: #f91880;      /* Rosa para acciones importantes como "Me gusta" */
+  --qubo-success: #00ba7c;     /* Verde para confirmaciones */
+  --qubo-warning: #ffd400;     /* Amarillo para advertencias */
+  --qubo-dark: #172634;        /* Fondo oscuro para modo dark */
+  --qubo-gray-dark: #536471;   /* Gris oscuro para texto secundario */
+  --qubo-gray-light: #e1e8ed;  /* Gris claro para bordes y separadores */
+  --qubo-light: #f7f9fa;       /* Fondo claro */
+  --qubo-white: #ffffff;       /* Blanco para fondos y textos sobre oscuro */
+  
+  /* Fuentes */
+  --qubo-font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  
+  /* Bordes redondeados */
+  --qubo-border-radius-sm: 8px;
+  --qubo-border-radius-md: 12px;
+  --qubo-border-radius-lg: 16px;
+  --qubo-border-radius-xl: 24px;
+  
+  /* Sombras */
+  --qubo-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.08);
+  --qubo-shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --qubo-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Sobreescritura de variables de Bootstrap */
+:root {
+  --bs-primary: var(--qubo-primary);
+  --bs-secondary: var(--qubo-secondary);
+  --bs-success: var(--qubo-success);
+  --bs-warning: var(--qubo-warning);
+  --bs-danger: var(--qubo-accent);
+  --bs-dark: var(--qubo-dark);
+  --bs-light: var(--qubo-light);
+  
+  --bs-primary-rgb: 26, 140, 216;
+  --bs-secondary-rgb: 78, 160, 240;
+  --bs-success-rgb: 0, 186, 124;
+  --bs-warning-rgb: 255, 212, 0;
+  --bs-danger-rgb: 249, 24, 128;
+  --bs-dark-rgb: 23, 38, 52;
+  --bs-light-rgb: 247, 249, 250;
+  
+  --bs-body-font-family: var(--qubo-font-family);
+  --bs-border-radius: var(--qubo-border-radius-sm);
+  --bs-border-radius-sm: var(--qubo-border-radius-sm);
+  --bs-border-radius-lg: var(--qubo-border-radius-md);
+  --bs-border-radius-xl: var(--qubo-border-radius-lg);
+  
+  --bs-body-bg: var(--qubo-light);
+  --bs-body-color: var(--qubo-dark);
+}
+
+/* Clases de utilidad personalizadas */
+.qubo-shadow-sm {
+  box-shadow: var(--qubo-shadow-sm);
+}
+
+.qubo-shadow-md {
+  box-shadow: var(--qubo-shadow-md);
+}
+
+.qubo-shadow-lg {
+  box-shadow: var(--qubo-shadow-lg);
+}
+
+.qubo-rounded-border {
+  border-radius: var(--qubo-border-radius-md);
+}
+
+.qubo-hover-effect {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.qubo-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--qubo-shadow-md);
+}
+
+/* Personalización de botones */
+.btn-primary {
+  background-color: var(--qubo-primary);
+  border-color: var(--qubo-primary);
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--qubo-secondary);
+  border-color: var(--qubo-secondary);
+}
+
+.btn-outline-primary {
+  color: var(--qubo-primary);
+  border-color: var(--qubo-primary);
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--qubo-primary);
+  border-color: var(--qubo-primary);
+}
+
+/* Personalización de tarjetas */
+.card {
+  border-radius: var(--qubo-border-radius-md);
+  border: 1px solid var(--qubo-gray-light);
+  box-shadow: var(--qubo-shadow-sm);
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: var(--qubo-shadow-md);
+}
+
+/* Personalización de inputs */
+.form-control {
+  border-radius: var(--qubo-border-radius-sm);
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--qubo-gray-light);
+}
+
+.form-control:focus {
+  border-color: var(--qubo-primary);
+  box-shadow: 0 0 0 0.25rem rgba(26, 140, 216, 0.15);
+}
+
+/* Estilos para publicaciones */
+.qubo-post {
+  border-radius: var(--qubo-border-radius-md);
+  border: 1px solid var(--qubo-gray-light);
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+}
+
+.qubo-post:hover {
+  box-shadow: var(--qubo-shadow-md);
+}
+
+.qubo-post-header {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.qubo-post-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  background-color: var(--qubo-gray-light);
+}
+
+.qubo-post-content {
+  padding: 0 1rem 1rem;
+}
+
+.qubo-post-actions {
+  display: flex;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--qubo-gray-light);
+}
+
+.qubo-post-button {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.qubo-post-button:hover {
+  background-color: rgba(26, 140, 216, 0.1);
+}
+
+.qubo-post-button-like:hover {
+  color: var(--qubo-accent);
+}
+
+.qubo-post-button-like.active {
+  color: var(--qubo-accent);
+}
+
+/* Estilos para comentarios */
+.qubo-comment {
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: var(--qubo-border-radius-sm);
+  background-color: var(--qubo-light);
+}
+
+.qubo-comment-author {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.qubo-comment-content {
+  margin-bottom: 0.5rem;
+}
+
+.qubo-comment-footer {
+  display: flex;
+  font-size: 0.75rem;
+  color: var(--qubo-gray-dark);
+}
+
+/* Estilos para auth forms */
+.qubo-auth-container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: var(--qubo-border-radius-lg);
+  box-shadow: var(--qubo-shadow-md);
+  background-color: var(--qubo-white);
+}
+
+.qubo-auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.qubo-auth-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--qubo-dark);
+  margin-bottom: 0.5rem;
+}
+
+.qubo-auth-subtitle {
+  color: var(--qubo-gray-dark);
+}
+
+.qubo-auth-form {
+  margin-bottom: 1.5rem;
+}
+
+.qubo-social-login {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--qubo-gray-light);
+}
+
+/* Estilos para slides */
+.qubo-slide {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  border-radius: var(--qubo-border-radius-lg);
+  background-color: var(--qubo-white);
+  box-shadow: var(--qubo-shadow-md);
+}
+
+.qubo-slide-header {
+  margin-bottom: 2rem;
+}
+
+.qubo-slide-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--qubo-dark);
+}
+
+.qubo-slide-subtitle {
+  color: var(--qubo-gray-dark);
+  font-size: 1.1rem;
+}
+
+.qubo-slide-content {
+  margin-bottom: 2rem;
+}
+
+.qubo-slide-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 576px) {
+  .qubo-auth-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .qubo-slide {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .qubo-post-header {
+    padding: 0.75rem;
+  }
+  
+  .qubo-post-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .btn-primary, .btn-outline-primary {
+    padding: 0.4rem 1.2rem;  }
+}
+
+/* Estilos para el botón de like */
+.qubo-post-button-like {
+  transition: color 0.3s ease;
+}
+
+.qubo-post-button-like:hover {
+  color: var(--qubo-accent) !important;
+}
+
+.qubo-post-button-like i {
+  transition: transform 0.3s ease;
+}
+
+.qubo-post-button-like:active i {
+  transform: scale(1.3);
+}
+
+/* Estilos para el centro de notificaciones */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 0.7rem;
+}
+
+.notification-menu {
+  width: 300px;
+  max-width: 100vw;
+}
+
+.notification-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-unread {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+.fs-7 {
+  font-size: 0.85rem;
+}
+
+.form-switch .form-check-input {
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.notification-pulse {
+  animation: pulse 2s infinite;
+}

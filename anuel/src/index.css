@@ -1,0 +1,71 @@
+/* Importamos nuestros estilos personalizados */
+@import './assets/qubo-styles.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: var(--qubo-font-family);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Resetear estilos para mejorar la consistencia */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Asegurarnos de que los colores de Bootstrap no son sobrescritos */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* Asegurarse de que la aplicación ocupa toda la altura disponible */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para los botones de offcanvas */
+.btn-close:focus {
+  box-shadow: none;
+}
+
+/* Hacer que la transición del offcanvas sea más suave */
+.offcanvas {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Estilos para el sidebar */
+.sidebar-col {
+  z-index: 1030;
+}
+
+/* Ajustes de espaciado para contenido principal */
+.main-content {
+  min-height: 100vh;
+}
+
+/* Agregar estilos de transición a elementos interactivos */
+.transition {
+  transition: all 0.2s ease-in-out;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Media queries para responsividad */
+@media (max-width: 767.98px) {
+  .main-content {
+    margin-left: 0 !important;
+  }
+}

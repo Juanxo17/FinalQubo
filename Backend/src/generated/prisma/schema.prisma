@@ -1,0 +1,126 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  password     String
+  proveedor    String
+  uid_firebase String? // opcional, si viene de Firebase
+  creacion     DateTime @default(now())
+
+  perfil    Profile? @relation(fields: [perfil_id], references: [id])
+  perfil_id String?  @unique
+
+  @@map("Cuenta")
+}
+
+model Profile {
+  id                  String   @id @default(uuid())
+  nombre_usuario      String   @unique
+  nombre_completo     String
+  foto_perfil         String?
+  biografia           String?  @db.VarChar(160)
+  sitio_web           String?  @db.VarChar(100)
+  creacion            DateTime @default(now())
+  fecha_actualizacion DateTime @updatedAt
+
+  account Account? // <- campo inverso que faltaba
+
+  posts                    Post[]
+  notificaciones_recibidas Notification[]        @relation("notificaciones_recibidas")
+  notificaciones_enviadas  Notification[]        @relation("notificaciones_enviadas")
+  configuracion            ConfiguracionUsuario?
+  me_gustas                MeGusta[]
+  seguidores               Seguidor[]            @relation("seguidos")
+  seguidos                 Seguidor[]            @relation("seguidores")
+
+  @@map("Perfil")
+}
+
+model Post {
+  id                   String   @id @default(uuid())
+  contenido            String
+  imagen_url           String?
+  creacion             DateTime @default(now())
+  editada              Boolean  @default(false)
+  fecha_edicion        DateTime @default(now())
+  contador_likes       Int      @default(0)
+  contador_comentarios Int      @default(0)
+  contador_compartidos Int      @default(0)
+
+  perfil    Profile @relation(fields: [perfil_id], references: [id])
+  perfil_id String
+
+  me_gustas      MeGusta[]
+  notificaciones Notification[]
+
+  @@map("Publicacion")
+}
+
+model Notification {
+  id             String   @id @default(uuid())
+  tipo           String
+  leida          Boolean  @default(false)
+  fecha_creacion DateTime @default(now())
+
+  perfil    Profile @relation("notificaciones_recibidas", fields: [perfil_id], references: [id])
+  perfil_id String
+
+  emisor    Profile @relation("notificaciones_enviadas", fields: [emisor_id], references: [id])
+  emisor_id String
+
+  publicacion    Post?   @relation(fields: [publicacion_id], references: [id])
+  publicacion_id String?
+
+  @@map("Notificacion")
+}
+
+model ConfiguracionUsuario {
+  perfil_id String  @id
+  perfil    Profile @relation(fields: [perfil_id], references: [id])
+
+  perfil_publico         Boolean @default(true)
+  recibir_notificaciones Boolean @default(true)
+  tema_oscuro            Boolean @default(false)
+  idioma                 String  @default("es")
+
+  @@map("ConfiguracionUsuario")
+}
+
+model MeGusta {
+  perfil_id      String
+  publicacion_id String
+  fecha          DateTime @default(now())
+
+  perfil      Profile @relation(fields: [perfil_id], references: [id])
+  publicacion Post    @relation(fields: [publicacion_id], references: [id])
+
+  @@id([perfil_id, publicacion_id])
+  @@map("MeGusta")
+}
+
+model Seguidor {
+  seguidor_id String
+  seguido_id  String
+  fecha       DateTime @default(now())
+
+  seguidor Profile @relation("seguidores", fields: [seguidor_id], references: [id])
+  seguido  Profile @relation("seguidos", fields: [seguido_id], references: [id])
+
+  @@id([seguidor_id, seguido_id])
+  @@map("Seguidor")
+}
