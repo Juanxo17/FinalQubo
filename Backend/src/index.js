@@ -38,12 +38,7 @@ app.get('/', (req, res) => {
 // Usar el router para otras rutas
 app.use('/api', router)
 
-// Para Vercel, exportar la app
-export default app;
-
-// Para desarrollo local
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log('Server is running on port: ' + PORT);
-  });
-}
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log('Server is running on port: ' + PORT);
+});
