@@ -6,10 +6,7 @@ dotenv.config()
 const connectDB = async () =>{
     try{
         await mongoose.connect(process.env.DATABASE_URL,{
-
-            //eliminado
             dbName: 'Qubo' 
-
         })
         console.log('Mongo connected succesfuly.')
     }
