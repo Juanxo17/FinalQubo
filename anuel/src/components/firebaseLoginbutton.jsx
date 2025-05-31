@@ -3,6 +3,7 @@ import { signInWithPopup, auth, provider } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { saveAuthData } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const FirebaseLoginButton = () => {
   const navigate = useNavigate();
@@ -14,10 +15,8 @@ const FirebaseLoginButton = () => {
     
     try {
       const result = await signInWithPopup(auth, provider);
-      const idToken = await result.user.getIdToken();
-
-      
-      const res = await fetch('http://localhost:8080/firebase-login', {
+      const idToken = await result.user.getIdToken();      
+      const res = await fetch(`${API_BASE_URL}/api/firebase-login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

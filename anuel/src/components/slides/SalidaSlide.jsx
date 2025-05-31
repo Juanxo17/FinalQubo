@@ -2,6 +2,7 @@ import { useProfile } from '../../context/ProfileContext';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Button, Alert, Spinner, Card } from 'react-bootstrap';
+import { API_BASE_URL } from '../../utils/config.js';
 
 const FinalSlide = ({ onBack }) => {
   const { profileData } = useProfile();
@@ -33,7 +34,7 @@ const FinalSlide = ({ onBack }) => {
       
       console.log('Enviando datos de perfil:', profileWithAccountId);
       
-      const res = await fetch('http://localhost:8080/profile', {
+      const res = await fetch(`${API_BASE_URL}/api/profile`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

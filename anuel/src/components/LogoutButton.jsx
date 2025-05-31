@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { clearAuthData, fetchWithAuth } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const LogoutButton = ({ className }) => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const LogoutButton = ({ className }) => {
     try {
       
       try {
-        await fetchWithAuth('http://localhost:8080/logout', {
+        await fetchWithAuth(`${API_BASE_URL}/api/logout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

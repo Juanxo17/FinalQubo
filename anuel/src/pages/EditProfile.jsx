@@ -4,6 +4,7 @@ import MainLayout from '../components/MainLayout';
 import { fetchWithAuth } from '../utils/auth';
 import { Container, Form, Button, Spinner, Alert, Row, Col, Card } from 'react-bootstrap';
 import ImageUploader from '../components/ImageUploader';
+import { API_BASE_URL } from '../utils/config.js';
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const EditProfile = () => {
     const fetchProfileData = async () => {
       try {
         
-        const checkRes = await fetchWithAuth('http://localhost:8080/check-profile');
+        const checkRes = await fetchWithAuth(`${API_BASE_URL}/api/check-profile`);
         const checkData = await checkRes.json();
         
         if (!checkRes.ok) {
@@ -40,7 +41,7 @@ const EditProfile = () => {
         
         
         
-        const profileRes = await fetchWithAuth('http://localhost:8080/profile/me');        if (!profileRes.ok) {
+        const profileRes = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);        if (!profileRes.ok) {
           setError('No se pudo cargar el perfil. Intenta más tarde.');
           setLoading(false);
           return;
@@ -76,7 +77,7 @@ const EditProfile = () => {
     try {
       
       
-      const res = await fetchWithAuth('http://localhost:8080/profile/update', {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/profile/update`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -188,7 +189,7 @@ const EditProfile = () => {
                       <Form.Label className="d-block">Subir nueva foto de perfil:</Form.Label>
                       <div style={{ maxWidth: '300px' }}>
                         <ImageUploader
-                          endpoint="/profile/image"
+                          endpoint="/api/profile/image"
                           buttonText="Seleccionar foto"
                           onImageUploaded={(url) => setProfileData(prev => ({ ...prev, fotoPerfil: url }))}
                           previewSize={150}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Form, Button, Row, Col, Alert, Spinner } from 'react-bootstrap';
 import { fetchWithAuth } from '../utils/auth';
 import ImageUploader from './ImageUploader';
+import { API_BASE_URL } from '../utils/config.js';
 
 const CreatePostInput = ({ onPostCreated }) => {
   const [content, setContent] = useState('');
@@ -25,7 +26,7 @@ const CreatePostInput = ({ onPostCreated }) => {
         imagenUrl: imageUrl
       };
         
-      const res = await fetchWithAuth('/posts', {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ const CreatePostInput = ({ onPostCreated }) => {
                 <Form.Group className="mt-2">
                   <ImageUploader 
                     onImageUploaded={handleImageUploaded}
-                    endpoint="/posts/image"
+                    endpoint="/api/posts/image"
                     buttonText="Seleccionar imagen"
                     previewSize={200}
                   />

@@ -5,6 +5,7 @@ import CreatePostInput from '../components/CreatePostInput';
 import PostList from '../components/PostList';
 import RightSidebar from '../components/RightSidebar';
 import { fetchWithAuth } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const Feed = () => {  const [username, setUsername] = useState('');
   const [newPost, setNewPost] = useState(null);
@@ -16,7 +17,7 @@ const Feed = () => {  const [username, setUsername] = useState('');
       try {
         setProfileLoading(true);
         
-        const res = await fetchWithAuth('http://localhost:8080/profile/me');
+        const res = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);
         
         if (res.ok) {
           const data = await res.json();

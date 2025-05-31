@@ -4,6 +4,7 @@ import { fetchWithAuth } from '../utils/auth';
 import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
 import CommentInput from './CommentInput';
+import { API_BASE_URL } from '../utils/config.js';
 
 
 const CommentItem = ({ comment, onEdit, onDelete, currentUserId }) => {
@@ -200,7 +201,7 @@ const CommentList = ({ postId, onCommentAdded }) => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const res = await fetchWithAuth('http://localhost:8080/profile/me');
+        const res = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);
         if (res.ok) {
           const data = await res.json();
           setCurrentUserId(data._id);
@@ -227,7 +228,7 @@ const CommentList = ({ postId, onCommentAdded }) => {
         throw new Error('ID de publicación inválido');
       }
       
-      const url = `http://localhost:8080/posts/${postId}/comments?page=${pageNum}&limit=10`;
+      const url = `${API_BASE_URL}/api/posts/${postId}/comments?page=${pageNum}&limit=10`;
       console.log("URL de la solicitud:", url);
       
       const res = await fetchWithAuth(url);
@@ -285,7 +286,7 @@ const CommentList = ({ postId, onCommentAdded }) => {
   
   const handleEditComment = async (commentId, newContent) => {
     try {
-      const res = await fetchWithAuth(`http://localhost:8080/comments/${commentId}`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/comments/${commentId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -328,7 +329,7 @@ const CommentList = ({ postId, onCommentAdded }) => {
   
   const handleDeleteComment = async (commentId) => {
     try {
-      const res = await fetchWithAuth(`http://localhost:8080/comments/${commentId}`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/comments/${commentId}`, {
         method: 'DELETE',
       });
       

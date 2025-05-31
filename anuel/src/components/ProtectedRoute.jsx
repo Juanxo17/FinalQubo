@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { API_BASE_URL } from '../utils/config.js';
 
 
 const ProtectedRoute = ({ children, requireProfile = false }) => {
@@ -18,10 +19,9 @@ const ProtectedRoute = ({ children, requireProfile = false }) => {
           setLoading(false);
           return;
         }
-        
-        if (requireProfile) {
+          if (requireProfile) {
           try {
-            const res = await fetch('http://localhost:8080/check-profile', {
+            const res = await fetch(`${API_BASE_URL}/api/check-profile`, {
               headers: {
                 'Authorization': `Bearer ${token}`
               }

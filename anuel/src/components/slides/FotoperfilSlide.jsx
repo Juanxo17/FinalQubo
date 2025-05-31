@@ -35,7 +35,7 @@ const FotoPerfilSlide = ({ onNext, onBack }) => {
           {}
           <ImageUploader 
             onImageUploaded={handleImageUploaded} 
-            endpoint="/profile/image"
+            endpoint="/api/profile/image"
             buttonText="Seleccionar foto de perfil"
             previewSize={150}
             className="mb-4"

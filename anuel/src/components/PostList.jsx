@@ -6,6 +6,7 @@ import PostEditor from './PostEditor';
 import CommentList from './CommentList';
 import { formatDistanceToNow } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { API_BASE_URL } from '../utils/config.js';
 
 const PostList = ({ profileId, newPost }) => {
   const [posts, setPosts] = useState([]);
@@ -54,12 +55,12 @@ const PostList = ({ profileId, newPost }) => {
       }
       
       
-      let url = 'http://localhost:8080/posts';
+      let url = `${API_BASE_URL}/api/posts`;
       if (profileId) {
         if (profileId === 'me') {
-          url = 'http://localhost:8080/posts/my';
+          url = `${API_BASE_URL}/api/posts/my`;
         } else {
-          url = `http://localhost:8080/profile/${profileId}/posts`;
+          url = `${API_BASE_URL}/api/profile/${profileId}/posts`;
         }
       }
       
@@ -148,7 +149,7 @@ const PostList = ({ profileId, newPost }) => {
       );
       
       
-      const res = await fetchWithAuth(`http://localhost:8080/posts/${postId}/like`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts/${postId}/like`, {
         method: 'POST'
       });
       
@@ -194,7 +195,7 @@ const PostList = ({ profileId, newPost }) => {
         return;
       }
       
-      const res = await fetchWithAuth(`http://localhost:8080/posts/${postId}`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts/${postId}`, {
         method: 'DELETE'
       });
       
@@ -255,7 +256,7 @@ const PostList = ({ profileId, newPost }) => {
         return;
       }
       
-      const res = await fetchWithAuth(`http://localhost:8080/posts/${postId}/like`);
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts/${postId}/like`);
       
       if (!res.ok) {
         throw new Error('Error al verificar like');

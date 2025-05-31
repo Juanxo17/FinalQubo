@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../utils/config.js';
 
 const Home = () => {
   const [checking, setChecking] = useState(true);
@@ -10,10 +11,9 @@ const Home = () => {
       const token = localStorage.getItem('token');
       const accountId = localStorage.getItem('accountId');
 
-      if (token && accountId) {
-        try {
+      if (token && accountId) {        try {
           
-          const res = await fetch('http://localhost:8080/check-profile', {
+          const res = await fetch(`${API_BASE_URL}/api/check-profile`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }

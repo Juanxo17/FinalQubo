@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../utils/config.js';
 
 const AuthForm = ({ mode }) => {
   const [email, setEmail] = useState('');
@@ -7,11 +8,9 @@ const AuthForm = ({ mode }) => {
   const isLogin = mode === 'login';
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const endpoint = isLogin
-      ? 'http://localhost:8080/login'
-      : 'http://localhost:8080/register';
+    e.preventDefault();    const endpoint = isLogin
+      ? `${API_BASE_URL}/api/login`
+      : `${API_BASE_URL}/api/register`;
 
     try {
       const res = await fetch(endpoint, {

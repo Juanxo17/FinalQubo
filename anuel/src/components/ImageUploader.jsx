@@ -5,7 +5,7 @@ import { API_BASE_URL, MAX_UPLOAD_SIZE } from '../utils/config.js';
 
 const ImageUploader = ({ 
   onImageUploaded,
-  endpoint = '/profile/image',
+  endpoint = '/api/profile/image',
   buttonText = 'Seleccionar imagen',
   className = '',
   showPreview = true,

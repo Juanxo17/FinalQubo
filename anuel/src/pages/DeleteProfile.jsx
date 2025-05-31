@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Alert, Form, Button, Spinner } from 'react-bootstrap';
 import MainLayout from '../components/MainLayout';
 import { fetchWithAuth } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const DeleteProfile = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const DeleteProfile = () => {
     
     const checkProfile = async () => {
       try {
-        const res = await fetchWithAuth('http://localhost:8080/check-profile');
+        const res = await fetchWithAuth(`${API_BASE_URL}/api/check-profile`);
         const data = await res.json();
         
         if (!res.ok) {
@@ -32,7 +33,7 @@ const DeleteProfile = () => {
         
         
         try {
-          const profileRes = await fetchWithAuth('http://localhost:8080/profile/me');
+          const profileRes = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);
             if (!profileRes.ok) {
             setError('No se pudieron cargar los datos del perfil');
             setLoading(false);
@@ -83,7 +84,7 @@ const DeleteProfile = () => {
       
       
       const res = await fetchWithAuth(
-        `http://localhost:8080/profile/${profileData.perfilId}`,
+        `${API_BASE_URL}/api/profile/${profileData.perfilId}`,
         {
           method: 'DELETE'
         }

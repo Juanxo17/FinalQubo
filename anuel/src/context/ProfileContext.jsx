@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { DoublyLinkedList } from '../utils/DoublyLinkedList'; 
 import { getAccountId, getProfileId } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const ProfileContext = createContext();
 
@@ -42,10 +43,9 @@ const ProfileProvider = ({ children }) => {
       const perfilId = getProfileId();
       
       if (!token || !accountId) return;
-      
-      try {
+        try {
         setIsProfileLoading(true);
-        const res = await fetch('http://localhost:8080/profile/me', {
+        const res = await fetch(`${API_BASE_URL}/api/profile/me`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

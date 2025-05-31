@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FirebaseLoginButton from '../components/firebaseLoginbutton';
 import { saveAuthData } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -29,9 +30,8 @@ const Register = () => {
     if (loading) return;
     setLoading(true);
     setErrorMsg('');
-    
-    try {
-      const res = await fetch('http://localhost:8080/register', {
+      try {
+      const res = await fetch(`${API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

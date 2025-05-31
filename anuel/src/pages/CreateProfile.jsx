@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SlideManager from "../components/slides/SlideManager";
+import { API_BASE_URL } from '../utils/config.js';
 
 const CreateProfile = () => {
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ const CreateProfile = () => {
       
       try {
         
-        const res = await fetch(`http://localhost:8080/check-profile`, {
+        const res = await fetch(`${API_BASE_URL}/api/check-profile`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`

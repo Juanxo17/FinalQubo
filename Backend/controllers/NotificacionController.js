@@ -112,29 +112,40 @@ export const markAllAsRead = async (req, res) => {
     
     console.log(`Marcando todas las notificaciones como leídas para usuario ${userId}`);
     
-    // 1. Actualizar en MongoDB
-    const result = await Notificacion.updateMany(
-      { usuarioId: userId, leida: false },
-      { leida: true }
-    );
-    
-    // 2. Obtener todas las notificaciones no leídas para actualizar en Firebase
+    // 1. Obtener todas las notificaciones no leídas ANTES de actualizarlas
     const notificaciones = await Notificacion.find({
       usuarioId: userId,
       leida: false
     });
     
-    // 3. Importar Firebase admin para acceder directamente a la base de datos
-    const { getDatabase } = await import('firebase-admin/database');
-    const db = getDatabase();
+    console.log(`Encontradas ${notificaciones.length} notificaciones no leídas para marcar`);
     
-    // 4. Actualizar todas las notificaciones en Firebase
-    const updates = {};
-    notificaciones.forEach(notif => {
-      updates[`/notifications/${userId}/${notif._id.toString()}/read`] = true;
-    });
+    // 2. Actualizar en MongoDB
+    const result = await Notificacion.updateMany(
+      { usuarioId: userId, leida: false },
+      { leida: true }
+    );
     
-    await db.ref().update(updates);
+    // 3. Si hay notificaciones para actualizar en Firebase
+    if (notificaciones.length > 0) {
+      try {
+        // Importar Firebase admin para acceder directamente a la base de datos
+        const { getDatabase } = await import('firebase-admin/database');
+        const db = getDatabase();
+        
+        // 4. Actualizar todas las notificaciones en Firebase
+        const updates = {};
+        notificaciones.forEach(notif => {
+          updates[`/notifications/${userId}/${notif._id.toString()}/read`] = true;
+        });
+        
+        await db.ref().update(updates);
+        console.log(`Actualizadas ${notificaciones.length} notificaciones en Firebase`);
+      } catch (firebaseError) {
+        console.error('Error al actualizar Firebase:', firebaseError);
+        // No fallar la operación completa si Firebase falla
+      }
+    }
     
     return res.status(200).json({
       message: 'Todas las notificaciones marcadas como leídas',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import { fetchWithAuth } from "../utils/auth";
+import { API_BASE_URL } from "../utils/config.js";
 import { Container, Spinner, Row, Col, Button, Nav } from "react-bootstrap";
 
 const ViewProfile = () => {
@@ -12,7 +13,7 @@ const ViewProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const checkRes = await fetchWithAuth("http://localhost:8080/check-profile");
+        const checkRes = await fetchWithAuth(`${API_BASE_URL}/api/check-profile`);
         const checkData = await checkRes.json();
         
         if (!checkRes.ok) {
@@ -27,7 +28,7 @@ const ViewProfile = () => {
         }
         
         try {
-          const profileRes = await fetchWithAuth("http://localhost:8080/profile/me");
+          const profileRes = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);
           
           if (!profileRes.ok) {
             setError("No se pudo cargar tu perfil");

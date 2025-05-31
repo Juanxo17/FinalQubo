@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Spinner, Alert } from 'react-bootstrap';
 import { fetchWithAuth } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const PostEditor = ({ post, show, onHide, onPostUpdated }) => {
   const [content, setContent] = useState('');
@@ -43,7 +44,7 @@ const PostEditor = ({ post, show, onHide, onPostUpdated }) => {
         imagenUrl: showImageInput ? imageUrl : ''
       };
       
-      const res = await fetchWithAuth(`http://localhost:8080/posts/${post._id}`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts/${post._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

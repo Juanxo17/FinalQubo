@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Spinner, Image } from 'react-bootstrap';
 import { fetchWithAuth } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const CommentInput = ({ postId, onCommentAdded }) => {
   const [comment, setComment] = useState('');
@@ -12,7 +13,7 @@ const CommentInput = ({ postId, onCommentAdded }) => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const res = await fetchWithAuth('http://localhost:8080/profile/me');
+        const res = await fetchWithAuth(`${API_BASE_URL}/api/profile/me`);
         if (res.ok) {
           const data = await res.json();
           setUserProfile(data);
@@ -39,7 +40,7 @@ const CommentInput = ({ postId, onCommentAdded }) => {
       };
       
       
-      const res = await fetchWithAuth(`http://localhost:8080/posts/${postId}/comments`, {
+      const res = await fetchWithAuth(`${API_BASE_URL}/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

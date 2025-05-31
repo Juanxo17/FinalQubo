@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import FirebaseLoginButton from '../components/firebaseLoginbutton'; 
 import { saveAuthData } from '../utils/auth';
+import { API_BASE_URL } from '../utils/config.js';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,9 +18,8 @@ const Login = () => {
     if (loading) return;
     setLoading(true);
     setErrorMsg('');
-    
-    try {
-      const res = await fetch('http://localhost:8080/login', {
+      try {
+      const res = await fetch(`${API_BASE_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
